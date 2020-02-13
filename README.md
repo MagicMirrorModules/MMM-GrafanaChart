@@ -33,8 +33,8 @@ modules: [
 	 module: 'MMM-GrafanaChart',
 		 position: 'top_right',   // This can be any of the regions.
 		 config: {
-				version: "6" // Mandartory if you are using Grafana verison 6.x or greater
-				id: "as8fa8na", // Mandartory if you are using Grafana verison 6.x or greater found after /d/ in the url
+				version: "6", // Only Mandatory if you are using Grafana verison 6 or greater
+				id: "as8fA8na", // Only Mandartory if you are using Grafana verison 6 or greater found after /d/ in the url
 				host: "grafana_host", //Mandatory. See url when displaying within grafana
 				port: 3000, // Mandatory.
 				dashboardname: "weatherforecast", // Mandatory.
