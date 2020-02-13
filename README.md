@@ -33,15 +33,17 @@ modules: [
 	 module: 'MMM-GrafanaChart',
 		 position: 'top_right',   // This can be any of the regions.
 		 config: {
-					host: "grafana_host", //Mandatory. See url when displaying within grafana
-					port: 3000, // Mandatory.
-					dashboardname: "weatherforecast", // Mandatory.
-					orgId: 1, // Mandatory.
-					panelId: 2, // Mandatory.
-					width: "100%", // Optional. Default: 100%
-					height: "100%", // Optional. Default: 100%
-					refreshInterval: 900 //Optional. Default: 900 = 1/4 hour
-				}
+				version: "6" // Mandartory if you are using Grafana verison 6.x or greater
+				id: "as8fa8na", // Mandartory if you are using Grafana verison 6.x or greater found after /d/ in the url
+				host: "grafana_host", //Mandatory. See url when displaying within grafana
+				port: 3000, // Mandatory.
+				dashboardname: "weatherforecast", // Mandatory.
+				orgId: 1, // Mandatory.
+				panelId: 2, // Mandatory.
+				width: "100%", // Optional. Default: 100%
+				height: "100%", // Optional. Default: 100%
+				refreshInterval: 900 //Optional. Default: 900 = 1/4 hour
+			}
 	},
 ]
 ````
