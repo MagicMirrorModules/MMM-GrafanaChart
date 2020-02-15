@@ -50,6 +50,12 @@ modules: [
 
 Everything needed is extractable from the <code>url</code> when you're viewing your chart using grafana in your browser.
 
+<b>Grafana version 6.x</b>
+
+![url provides needed information](grafana_version_6_explanations_image.png)
+
+<b>Grafana version 5 or older</b>
+
 ![url provides needed information](https://github.com/SvenSommer/MMM-GrafanaChart/blob/master/config_url.png?raw=true)
 ## Optional configuration options
 
