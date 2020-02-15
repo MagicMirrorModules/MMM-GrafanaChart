@@ -30,9 +30,6 @@ Change the grafana.ini to have the following settings
 # enable anonymous access
 enabled = true 
 
-# specify organization name that should be used for unauthenticated users
-org_name = Main Org.
-
 # specify role for unauthenticated users
 org_role = Viewer
 
