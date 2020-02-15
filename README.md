@@ -21,9 +21,28 @@ git clone https://github.com/SvenSommer/MMM-GrafanaChart
 Configure the module in your `config.js` file.
 
 ## Configuration
+<b> Configuration of the Grafana </b>
+
+Change the grafana.ini to have the following settings
+````javascript
+[auth.anonymous]
+
+# enable anonymous access
+enabled = true 
+
+# specify organization name that should be used for unauthenticated users
+org_name = Main Org.
+
+# specify role for unauthenticated users
+org_role = Viewer
+
+[security]
+# https://grafana.com/docs/grafana/latest/installation/configuration/#allow-embedding
+allow_embedding = true
+````
+<b> Configuration of the MagicMirror config-file </b>
 
 To use this module, you have to specify where your grafana installation is hosted and which chart you'd like to display.
-
 
 
 Add the module to the modules array in the `config/config.js` file:
