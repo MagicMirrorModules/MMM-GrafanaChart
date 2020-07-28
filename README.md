@@ -53,6 +53,7 @@ modules: [
 				id: "as8fA8na", // Only Mandartory if you are using Grafana verison 6 or greater found after /d/ in the url
 				host: "grafana_host", //Mandatory. See url when displaying within grafana
 				port: 3000, // Mandatory.
+				ssl: false, // Optional. Consider SSL enabling your data. Default: false
 				dashboardname: "weatherforecast", // Mandatory.
 				orgId: 1, // Mandatory.
 				panelId: 2, // Mandatory.
