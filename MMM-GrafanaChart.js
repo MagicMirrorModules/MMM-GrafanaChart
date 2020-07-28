@@ -12,7 +12,7 @@ Module.register("MMM-GrafanaChart", {
         height:"100%",
         width:"100%",
         refreshInterval: 900,
-        ssl: false
+        https: false
     },
 
     // Define start sequence.
