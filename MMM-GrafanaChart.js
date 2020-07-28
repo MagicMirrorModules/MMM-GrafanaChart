@@ -28,10 +28,10 @@ Module.register("MMM-GrafanaChart", {
         iframe.height = this.config.height;
 		if (this.config.version == "6")
 		{
-        iframe.src =  ((this.config.ssl === true) ? "https://" : "http://") +  this.config.host + ":" + this.config.port + "/d/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&fullscreen&kiosk";
+        iframe.src =  ((this.config.https === true) ? "https://" : "http://") +  this.config.host + ":" + this.config.port + "/d/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&fullscreen&kiosk";
 		}
 		else{
-			        iframe.src =  ((this.config.ssl === true) ? "https://" : "http://") +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId;;
+			        iframe.src =  ((this.config.https === true) ? "https://" : "http://") +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId;;
 			}
         iframe.setAttribute("timestamp", new Date().getTime());
         return iframe;
@@ -53,10 +53,10 @@ Module.register("MMM-GrafanaChart", {
         }
 			if (this.config.version == "6")
 		{
-        this.src = ((this.config.ssl === true) ? "https://" : "http://") +  this.config.host + ":" + this.config.port + "/d/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&fullscreen&kiosk";
+        this.src = ((this.config.https === true) ? "https://" : "http://") +  this.config.host + ":" + this.config.port + "/d/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&fullscreen&kiosk";
 		}
 		else{
-		this.src = ((this.config.ssl === true) ? "https://" : "http://") +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId;
+		this.src = ((this.config.https === true) ? "https://" : "http://") +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId;
 		}
         Log.info("attempting to update dom for iFrameReload");
         Log.info('/"this/" module is: ' + this);
