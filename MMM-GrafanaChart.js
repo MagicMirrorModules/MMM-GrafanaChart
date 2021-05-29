@@ -9,7 +9,8 @@
 Module.register("MMM-GrafanaChart", {
     // Default module config.
     defaults: {
-        protocol: "http",
+        protocol: "http", // this is needed, so it can be overwritten in the old-style config
+        url: "invalid",
         height:"100%",
         width:"100%",
         scrolling:"no",
@@ -19,6 +20,10 @@ Module.register("MMM-GrafanaChart", {
     // Define start sequence.
     start: function() {
         Log.info("Starting module: " + this.name);
+        // if the user did not provide a URL property, try to assemble one from the older config style, that stored everything in parts
+        if( this.config.url === "invalid" ){
+            this.config.url = this.buildUrl();
+        }
         this.scheduleUpdate();
     },
 
@@ -46,14 +51,19 @@ Module.register("MMM-GrafanaChart", {
         return URL;
     },
 
+
     // Override dom generator.
     getDom: function() {
+        if( ! this.config.url.match(/^https?:/i) ){
+            return document.createTextNode(this.name+" found no usable URL configured. Please check your config!");
+        }
+
         var iframe = document.createElement("IFRAME");
         iframe.style = "border:0"
         iframe.width = this.config.width;
         iframe.height = this.config.height;
         iframe.scrolling = this.config.scrolling;
-        iframe.src = this.buildUrl();
+        iframe.src = this.config.url;
         // this attribute is used to ensure MagicMirror doesn't throw away our updateDom(), because the DOM object is identical to the previous one
         iframe.setAttribute("timestamp", new Date().getTime());
         return iframe;

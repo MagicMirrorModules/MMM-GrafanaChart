@@ -49,15 +49,7 @@ modules: [
 		module: 'MMM-GrafanaChart',
 		position: 'top_right',   // This can be any of the regions.
 		config: {
-				version: "6", // Only add this line if you are using Grafana verison 6 or greater
-				id: "as8fA8na", // Only Mandartory if you are using Grafana verison 6 or greater found after /d/ in the url
-				host: "grafana_host", //Mandatory. See url when displaying within grafana
-				port: 3000, // Mandatory.
-				dashboardname: "weatherforecast", // Mandatory.
-				orgId: 1, // Mandatory.
-				panelId: 2, // Mandatory.
-				from: "now-1d" // use any of grafanas time-range-controls
-				to: "now" // 
+				url: "https://localhost:5000/....", // see below on how to get the URL from Grafana
 				width: "100%", // Optional. Default: 100%
 				height: "100%", // Optional. Default: 100%
 				scrolling: "yes", // Optional. Default: no
@@ -67,15 +59,21 @@ modules: [
 ]
 ````
 
-Everything needed is extractable from the <code>url</code> when you're viewing your chart using grafana in your browser.
+Grafana has a nice dialog that allows you to generate the embed URL you need.
 
-<b>Grafana version 6.x</b>
+For this make sure that your current view of the graph represents the time range and autorefresh interval you want on your mirror.
 
-![url provides needed information](grafana_version_6_explanations_image.png)
+Then click the graph's header, go to "Share", then into the "Embed" tab.
 
-<b>Grafana version 5 or older</b>
+Deselect the "Current time range" option, which would turn your "last three hours" query into the actual last three hours in absolute time.
 
-![url provides needed information](https://github.com/SvenSommer/MMM-GrafanaChart/blob/master/config_url.png?raw=true)
+Afterwards you can copy the URL from the `iframe`'s `src` attribute. Open it in a tab to check that everything looks and behaves as you would like.
+
+If everything is as you like, you can copy the URL and paste it in the `url` config option.
+
+Here is the process in a short animated form:
+![How to get the URL](EmbedURL_from_Grafana.gif)
+
 ## Optional configuration options
 
 The following properties can be configured:
@@ -90,10 +88,6 @@ The following properties can be configured:
 		</tr>
 	<thead>
 	<tbody>
-		<tr>
-			<td><code>protocol</code></td>
-			<td>Protocol used to access grafana. <code>'http'</code> or <code>'https'</code> are valid options.	<br><b>Default value:<code>"http"</code></b></td>
-		</tr>
 		<tr>
 			<td><code>width</code></td>
 			<td>Width of the displayed chart. <code>'150 px'</code> or <code>'50 %'</code> are valid options.	<br><b>Default value:<code>"100%"</code></b></td>
