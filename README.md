@@ -46,9 +46,9 @@ Add the module to the modules array in the `config/config.js` file:
 ````javascript
 modules: [
 	{
-	 module: 'MMM-GrafanaChart',
-		 position: 'top_right',   // This can be any of the regions.
-		 config: {
+		module: 'MMM-GrafanaChart',
+		position: 'top_right',   // This can be any of the regions.
+		config: {
 				version: "6", // Only add this line if you are using Grafana verison 6 or greater
 				id: "as8fA8na", // Only Mandartory if you are using Grafana verison 6 or greater found after /d/ in the url
 				host: "grafana_host", //Mandatory. See url when displaying within grafana
@@ -62,7 +62,7 @@ modules: [
 				height: "100%", // Optional. Default: 100%
 				scrolling: "yes", // Optional. Default: no
 				refreshInterval: 900 //Optional. Default: 900 = 1/4 hour
-			}
+		}
 	},
 ]
 ````
