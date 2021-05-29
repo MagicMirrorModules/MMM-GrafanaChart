@@ -21,6 +21,27 @@ Module.register("MMM-GrafanaChart", {
         Log.info("Starting module: " + this.name);
         this.scheduleUpdate();
     },
+
+    buildUrl: function() {
+        var URL = "";
+        URL += this.config.protocol + "://";
+        URL += this.config.host + ":" + this.config.port;
+        if (this.config.version == "6") {
+            URL += "/d-solo/" + this.config.id;
+        } else{
+            URL += "/dashboard-solo/db";
+        }
+        URL += "/" + this.config.dashboardname;
+        URL += "?orgId=" + this.config.orgId;
+        URL += "&panelId=" + this.config.panelId;
+        URL += "&from=" + this.config.from;
+        URL += "&to=" + this.config.to
+        if (this.config.version == "6") {
+            URL += "&fullscreen&kiosk";
+        }
+        return URL;
+    },
+
     // Override dom generator.
     getDom: function() {
         var iframe = document.createElement("IFRAME");
@@ -28,13 +49,7 @@ Module.register("MMM-GrafanaChart", {
         iframe.width = this.config.width;
         iframe.height = this.config.height;
         iframe.scrolling = this.config.scrolling;
-        if (this.config.version == "6") {
-            iframe.src =  this.config.protocol + "://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
-        } else{
-            iframe.src =  this.config.protocol + "://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;;
-        }
         iframe.setAttribute("timestamp", new Date().getTime());
-        iframe.setAttribute("scrolling", "no");
         return iframe;
     },
     scheduleUpdate: function() {
