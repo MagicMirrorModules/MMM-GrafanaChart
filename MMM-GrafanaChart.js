@@ -9,6 +9,7 @@
 Module.register("MMM-GrafanaChart", {
     // Default module config.
     defaults: {
+        protocol: "http",
         height:"100%",
         width:"100%",
         scrolling:"no",
@@ -28,9 +29,9 @@ Module.register("MMM-GrafanaChart", {
         iframe.height = this.config.height;
         iframe.scrolling = this.config.scrolling;
         if (this.config.version == "6") {
-            iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
+            iframe.src =  this.config.protocol + "://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
         } else{
-            iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;;
+            iframe.src =  this.config.protocol + "://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;;
         }
         iframe.setAttribute("timestamp", new Date().getTime());
         return iframe;

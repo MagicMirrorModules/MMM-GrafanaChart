@@ -91,6 +91,10 @@ The following properties can be configured:
 	<thead>
 	<tbody>
 		<tr>
+			<td><code>protocol</code></td>
+			<td>Protocol used to access grafana. <code>'http'</code> or <code>'https'</code> are valid options.	<br><b>Default value:<code>"http"</code></b></td>
+		</tr>
+		<tr>
 			<td><code>width</code></td>
 			<td>Width of the displayed chart. <code>'150 px'</code> or <code>'50 %'</code> are valid options.	<br><b>Default value:<code>"100%"</code></b></td>
 		</tr>
