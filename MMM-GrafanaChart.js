@@ -19,7 +19,7 @@ Module.register("MMM-GrafanaChart", {
     // Define start sequence.
     start: function() {
         Log.info("Starting module: " + this.name);
-        this.scheduleUpdate(this.config.refreshInterval);
+        this.scheduleUpdate();
     },
     // Override dom generator.
     getDom: function() {
@@ -37,19 +37,15 @@ Module.register("MMM-GrafanaChart", {
         iframe.setAttribute("scrolling", "no");
         return iframe;
     },
-    scheduleUpdate: function(delay) {
-        var nextLoad = this.config.refreshInterval;
-        if (typeof delay !== "undefined" && delay >= 0) {
-            nextLoad = delay * 1000; // Convert seconds to millis
-        }
+    scheduleUpdate: function() {
         var self = this;
         setTimeout(function() {
             self.updateFrame();
-        }, nextLoad);
+        }, this.config.refreshInterval*1000);
     },
     updateFrame: function() {
         Log.info("attempting to update dom for iFrameReload");
         this.updateDom(1000);
-        this.scheduleUpdate(this.config.refreshInterval);
+        this.scheduleUpdate();
     }
 });
