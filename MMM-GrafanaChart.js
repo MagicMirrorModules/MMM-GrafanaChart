@@ -34,6 +34,7 @@ Module.register("MMM-GrafanaChart", {
             iframe.src =  this.config.protocol + "://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;;
         }
         iframe.setAttribute("timestamp", new Date().getTime());
+        iframe.setAttribute("scrollable", "no");
         return iframe;
     },
     scheduleUpdate: function(delay) {
