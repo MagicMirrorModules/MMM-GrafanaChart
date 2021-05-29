@@ -53,6 +53,8 @@ Module.register("MMM-GrafanaChart", {
         iframe.width = this.config.width;
         iframe.height = this.config.height;
         iframe.scrolling = this.config.scrolling;
+        iframe.src = this.buildUrl();
+        // this attribute is used to ensure MagicMirror doesn't throw away our updateDom(), because the DOM object is identical to the previous one
         iframe.setAttribute("timestamp", new Date().getTime());
         return iframe;
     },
