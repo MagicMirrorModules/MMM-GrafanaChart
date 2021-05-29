@@ -28,7 +28,7 @@ Change the grafana.ini to have the following settings
 [auth.anonymous]
 
 # enable anonymous access
-enabled = true 
+enabled = true
 
 # specify role for unauthenticated users
 org_role = Viewer
@@ -98,7 +98,7 @@ The following properties can be configured:
 			<td><code>height</code></td>
 			<td>Height of the displayed chart. <code>'150 px'</code> or <code>'50 %'</code> are valid options.	<br><b>Default value:<code>"100%"</code></b></td>
 		</tr>
-			<tr>
+		<tr>
 			<td><code>refreshInterval</code></td>
 			<td>Update interval of the diagram in seconds.
 				<br><b>Default value:</b> <code>900</code>  = 15 \* 60 (four times every hour)
