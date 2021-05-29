@@ -48,12 +48,7 @@ Module.register("MMM-GrafanaChart", {
         }, nextLoad);
     },
     updateFrame: function() {
-        if (this.config.url === "") {
-            Log.error("Tried to refresh, iFrameReload URL not set!");
-            return;
-        }
         Log.info("attempting to update dom for iFrameReload");
-        Log.info('/"this/" module is: ' + this);
         this.updateDom(1000);
         this.scheduleUpdate(this.config.refreshInterval);
     }
