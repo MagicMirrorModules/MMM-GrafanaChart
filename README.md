@@ -24,7 +24,7 @@ Configure the module in your `config.js` file.
 <b> Configuration of the Grafana </b>
 
 Change the grafana.ini to have the following settings
-````javascript
+````ini
 [auth.anonymous]
 
 # enable anonymous access
