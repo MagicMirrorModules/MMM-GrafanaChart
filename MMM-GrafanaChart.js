@@ -29,8 +29,7 @@ Module.register("MMM-GrafanaChart", {
         iframe.scrolling = this.config.scrolling;
 		if (this.config.version == "6")
 		{
-        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&fullscreen&kiosk";
-
+	        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&fullscreen&kiosk";
 		}
 		else{
 			        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId;;
@@ -55,7 +54,7 @@ Module.register("MMM-GrafanaChart", {
         }
 			if (this.config.version == "6")
 		{
-        this.src = "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&fullscreen&kiosk";
+        	this.src = "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&fullscreen&kiosk";
 		}
 		else{
 		this.src = "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId;
