@@ -58,6 +58,7 @@ modules: [
 				panelId: 2, // Mandatory.
 				width: "100%", // Optional. Default: 100%
 				height: "100%", // Optional. Default: 100%
+				scrolling: "yes", // Optional. Default: no
 				refreshInterval: 900 //Optional. Default: 900 = 1/4 hour
 			}
 	},
