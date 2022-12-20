@@ -56,6 +56,8 @@ modules: [
 				dashboardname: "weatherforecast", // Mandatory.
 				orgId: 1, // Mandatory.
 				panelId: 2, // Mandatory.
+				from: "now-1d" // use any of grafanas time-range-controls
+				to: "now" // 
 				width: "100%", // Optional. Default: 100%
 				height: "100%", // Optional. Default: 100%
 				scrolling: "yes", // Optional. Default: no
