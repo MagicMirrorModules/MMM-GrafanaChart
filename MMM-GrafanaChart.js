@@ -34,8 +34,12 @@ Module.register("MMM-GrafanaChart", {
         URL += "/" + this.config.dashboardname;
         URL += "?orgId=" + this.config.orgId;
         URL += "&panelId=" + this.config.panelId;
-        URL += "&from=" + this.config.from;
-        URL += "&to=" + this.config.to
+        if( this.config.from ){
+            URL += "&from=" + this.config.from;
+        }
+        if( this.config.to ){
+            URL += "&to=" + this.config.to
+        }
         if (this.config.version == "6") {
             URL += "&fullscreen&kiosk";
         }
