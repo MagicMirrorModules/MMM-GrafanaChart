@@ -52,7 +52,7 @@ modules: [
 				url: "https://localhost:5000/....", // see below on how to get the URL from Grafana
 				width: "100%", // Optional. Default: 100%
 				height: "100%", // Optional. Default: 100%
-				scrolling: "yes", // Optional. Default: no
+				scrolling: "no", // Optional. Default: no
 				refreshInterval: 900 //Optional. Default: 900 = 1/4 hour
 		}
 	},
@@ -100,6 +100,12 @@ The following properties can be configured:
 			<td><code>refreshInterval</code></td>
 			<td>Update interval of the diagram in seconds.
 				<br><b>Default value:</b> <code>900</code>  = 15 \* 60 (four times every hour)
+			</td>
+		</tr>
+		<tr>
+			<td><code>scrolling</code></td>
+			<td>if set to <code>yes</code> it enables the iframe content to be scrollable.
+				<br><b>Default value:</b> <code>no</code>
 			</td>
 		</tr>
 	</tbody>
