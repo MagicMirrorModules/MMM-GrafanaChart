@@ -9,6 +9,8 @@
 Module.register("MMM-GrafanaChart", {
     // Default module config.
     defaults: {
+        protocol: "http", // this is needed, so it can be overwritten in the old-style config
+        url: "invalid",
         height:"100%",
         width:"100%",
         scrolling:"no",
@@ -18,50 +20,63 @@ Module.register("MMM-GrafanaChart", {
     // Define start sequence.
     start: function() {
         Log.info("Starting module: " + this.name);
-        this.scheduleUpdate(this.config.refreshInterval);
+        // if the user did not provide a URL property, try to assemble one from the older config style, that stored everything in parts
+        if( this.config.url === "invalid" ){
+            this.config.url = this.buildUrl();
+        }
+        this.scheduleUpdate();
     },
+
+    buildUrl: function() {
+        var URL = "";
+        URL += this.config.protocol + "://";
+        URL += this.config.host + ":" + this.config.port;
+        if (this.config.version == "6") {
+            URL += "/d-solo/" + this.config.id;
+        } else{
+            URL += "/dashboard-solo/db";
+        }
+        URL += "/" + this.config.dashboardname;
+        URL += "?orgId=" + this.config.orgId;
+        URL += "&panelId=" + this.config.panelId;
+        if( this.config.from ){
+            URL += "&from=" + this.config.from;
+        }
+        if( this.config.to ){
+            URL += "&to=" + this.config.to
+        }
+        if (this.config.version == "6") {
+            URL += "&fullscreen&kiosk";
+        }
+        return URL;
+    },
+
+
     // Override dom generator.
     getDom: function() {
+        if( ! this.config.url.match(/^https?:/i) ){
+            return document.createTextNode(this.name+" found no usable URL configured. Please check your config!");
+        }
+
         var iframe = document.createElement("IFRAME");
         iframe.style = "border:0"
         iframe.width = this.config.width;
         iframe.height = this.config.height;
         iframe.scrolling = this.config.scrolling;
-		if (this.config.version == "6")
-		{
-	        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
-		}
-		else{
-			        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;;
-			}
+        iframe.src = this.config.url;
+        // this attribute is used to ensure MagicMirror doesn't throw away our updateDom(), because the DOM object is identical to the previous one
         iframe.setAttribute("timestamp", new Date().getTime());
         return iframe;
     },
-    scheduleUpdate: function(delay) {
-        var nextLoad = this.config.refreshInterval;
-        if (typeof delay !== "undefined" && delay >= 0) {
-            nextLoad = delay * 1000; // Convert seconds to millis
-        }
+    scheduleUpdate: function() {
         var self = this;
         setTimeout(function() {
             self.updateFrame();
-        }, nextLoad);
+        }, this.config.refreshInterval*1000);
     },
     updateFrame: function() {
-        if (this.config.url === "") {
-            Log.error("Tried to refresh, iFrameReload URL not set!");
-            return;
-        }
-			if (this.config.version == "6")
-		{
-        	this.src = "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
-		}
-		else{
-		this.src = "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;
-		}
         Log.info("attempting to update dom for iFrameReload");
-        Log.info('/"this/" module is: ' + this);
         this.updateDom(1000);
-        this.scheduleUpdate(this.config.refreshInterval);
+        this.scheduleUpdate();
     }
 });
