@@ -9,53 +9,32 @@
 Module.register("MMM-GrafanaChart", {
     // Default module config.
     defaults: {
-        url: "invalid",
-        configVersion: "v1",
         height:"100%",
         width:"100%",
         scrolling:"no",
-        chartTag: "",
         refreshInterval: 900
     },
 
     // Define start sequence.
     start: function() {
-        Log.info("Starting module: " + this.name + this.config.chartTag );
-        if ( this.config.customTag !== "" ) {
-                customTagSuffix = " - " + this.config.customTag;
-        } else {
-                customTagSuffix = "";
-        }
-        Log.info("MMM-GraphanaChart module configVersion : " + customTagSuffix );
+        Log.info("Starting module: " + this.name);
         this.scheduleUpdate(this.config.refreshInterval);
     },
-
     // Override dom generator.
     getDom: function() {
-        if ( this.config.configVersion == "v2" ) {
-                if(  ! this.config.url.match(/^https?:/i)  ){
-                 return document.createTextNode(this.name+" found no usable URL configured. Please check your config!");
-                }
-        }
-
         var iframe = document.createElement("IFRAME");
         iframe.style = "border:0"
         iframe.width = this.config.width;
         iframe.height = this.config.height;
-
-        if ( this.config.configVersion == "v2" ) {
-                iframe.src = this.config.url + "&fullscreen&kiosk";
-        }
-        if ( this.config.configVersion == "v1" ) {
-                if (this.config.version == "6") {
-                        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
-                } else {
-                        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;
-                }
-        }
-        // this attribute is used to ensure MagicMirror doesn't throw away our updateDom(), because the DOM object is identical to the previous one
-        iframe.setAttribute("timestamp", new Date().getTime());
         iframe.scrolling = this.config.scrolling;
+		if (this.config.version == "6")
+		{
+	        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
+		}
+		else{
+			        iframe.src =  "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;;
+			}
+        iframe.setAttribute("timestamp", new Date().getTime());
         return iframe;
     },
     scheduleUpdate: function(delay) {
@@ -63,33 +42,26 @@ Module.register("MMM-GrafanaChart", {
         if (typeof delay !== "undefined" && delay >= 0) {
             nextLoad = delay * 1000; // Convert seconds to millis
         }
-
         var self = this;
         setTimeout(function() {
-             self.updateFrame();
+            self.updateFrame();
         }, nextLoad);
-     },
-
+    },
     updateFrame: function() {
+        if (this.config.url === "") {
+            Log.error("Tried to refresh, iFrameReload URL not set!");
+            return;
+        }
+			if (this.config.version == "6")
+		{
+        	this.src = "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
+		}
+		else{
+		this.src = "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname+  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;
+		}
         Log.info("attempting to update dom for iFrameReload");
-        if ( this.config.configVersion == "v1" ) {
-                if (this.config.url === "") {
-                    Log.error("Tried to refresh, iFrameReload URL not set!");
-                    return;
-                }
-                if (this.config.version == "6") {
-                        this.src = "http://" +  this.config.host + ":" + this.config.port + "/d-solo/" + this.config.id + "/" + this.config.dashboardname +  "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to + "&fullscreen&kiosk";
-                } else {
-                        this.src = "http://" +  this.config.host + ":" + this.config.port + "/dashboard-solo/db/" + this.config.dashboardname + "?orgId=" + this.config.orgId + "&panelId=" + this.config.panelId + "&from=" + this.config.from + "&to=" + this.config.to;
-                }
-                Log.info('/"this/" module is: ' + this);
-        }
-        if ( this.config.configVersion == "v2" ) {
-                this.src = this.config.url + "&fullscreen&kiosk";
-        }
-
+        Log.info('/"this/" module is: ' + this);
         this.updateDom(1000);
         this.scheduleUpdate(this.config.refreshInterval);
-
     }
 });
