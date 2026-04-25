@@ -4,7 +4,7 @@ This [MagicMirror²](http://robstechlog.com/2017/06/25/building-a-big-magicmirro
 <b>Important Note:</b> This module requires a running grafana installation. To install Grafana, follow the official [installation instructions](http://docs.grafana.org/installation/).
 
 <b>[This blogpost](http://www.robstechlog.com/2017/06/30/personal-weather-chart-module/) describes how to install and use grafana and build a weatherchart.</b><br>
-![example of a grafana weather chart](https://github.com/SvenSommer/MMM-GrafanaChart/blob/master/weather_explained.gif?raw=true)
+![example of a grafana weather chart](https://github.com/MagicMirrorModules/MMM-GrafanaChart/blob/master/weather_explained.gif?raw=true)
 
 ## Installation of the module
 
@@ -15,7 +15,7 @@ cd ~/MagicMirror/modules
 
 Clone this repository:
 ````
-git clone https://github.com/SvenSommer/MMM-GrafanaChart
+git clone https://github.com/MagicMirrorModules/MMM-GrafanaChart
 ````
 
 Configure the module in your `config.js` file.
